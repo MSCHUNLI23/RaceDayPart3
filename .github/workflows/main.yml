@@ -1,0 +1,28 @@
+name: .NET Build
+
+on:
+  push:
+    branches: [ "main", "Part3" ]
+  pull_request:
+    branches: [ "main", "Part3" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore RaceDay.API.sln
+
+    - name: Build
+      run: dotnet build RaceDay.API.sln --no-restore --configuration Release
+
+    - name: Test
+      run: dotnet test RaceDay.API.sln --no-build --configuration Release --verbosity normal
