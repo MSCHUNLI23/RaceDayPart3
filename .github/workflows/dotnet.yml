@@ -1,6 +1,6 @@
 name: .NET Build
 
-on:
+on: 
   push:
     branches: [ "main", "Part3" ]
   pull_request:
